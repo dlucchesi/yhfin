@@ -4,18 +4,20 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 @Component
 @Getter
 @Setter
-public class LoginData {
+public class LoginData implements Serializable {
 
-    protected String username;
+    protected String login;
     protected String password;
 
     @Override
     public String toString() {
         return "LoginData{" +
-                "username='" + username + '\'' +
+                "login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

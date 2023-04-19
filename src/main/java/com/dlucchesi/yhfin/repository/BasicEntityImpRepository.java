@@ -9,10 +9,10 @@ import java.util.Set;
 @Repository
 public interface BasicEntityImpRepository extends JpaRepository<BasicEntityImp, Long> {
 
-    Set<BasicEntityImp> findAllByIsDeletedIsFalseAndIsActiveIsTrue();
-
-    Set<BasicEntityImp> findAllByIsDeletedIsFalse();
-    Set<BasicEntityImp> findAllByIsDeletedIsTrue();
-    Set<BasicEntityImp> findAllByIsActiveIsTrue();
-    Set<BasicEntityImp> findAllByIsActiveIsFalse();
+//    Set<BasicEntityImp> findAllByIsDeletedIsFalseAndIsActiveIsTrue();
+//
+//    Set<BasicEntityImp> findAllByIsDeletedIsFalse();
+//    Set<BasicEntityImp> findAllByIsDeletedIsTrue();
+//    Set<BasicEntityImp> findAllByIsActiveIsTrue();
+//    Set<BasicEntityImp> findAllByIsActiveIsFalse();
 }

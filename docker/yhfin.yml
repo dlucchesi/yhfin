@@ -1,0 +1,21 @@
+version: '3.8' # docker-compose
+
+services:
+  db:
+    image: 'postgres:14.1-alpine'
+    # restart: always
+    restart: unless-stopped
+    container_name: db
+    volumes:
+      - /D/data/yhfin/:/var/lib/postgresql/data:rw
+      # script to init load -> create databases
+      - /D/projects/yhfin/docker/db/create_postgresql.sql:/docker-entrypoint-initdb.d/create_tables.sql:ro
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=usr_yhfin
+      - POSTGRES_PASSWORD=654321
+
+volumes:
+  db:
+    driver: local
