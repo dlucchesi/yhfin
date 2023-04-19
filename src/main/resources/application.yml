@@ -1,1 +1,5 @@
-
+# swagger-ui custom path
+springdoc:
+  packagesToScan: com.dlucchesi.yhfin.controller.imp
+  swagger-ui:
+    path: /swagger-ui.html
