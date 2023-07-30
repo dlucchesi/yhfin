@@ -1,9 +1,5 @@
 package com.dlucchesi.yhfin.controller.imp;
 
-import com.dlucchesi.yhfin.exceptions.LoginDeletedUserException;
-import com.dlucchesi.yhfin.exceptions.LoginInactiveUserException;
-import com.dlucchesi.yhfin.exceptions.LoginNotFoundException;
-import com.dlucchesi.yhfin.exceptions.LoginWrongPasswordException;
 import com.dlucchesi.yhfin.facade.UserFacade;
 import com.dlucchesi.yhfin.model.User;
 import com.dlucchesi.yhfin.model.data.LoginData;
@@ -36,13 +32,13 @@ public class UserControllerImp implements com.dlucchesi.yhfin.controller.UserCon
     @Override
     @PostMapping
     @RequestMapping("/doLogin")
-    public ResponseEntity<?> doLogin(@RequestBody LoginData login, HttpServletRequest request)
-            throws LoginWrongPasswordException, LoginNotFoundException, LoginInactiveUserException, LoginDeletedUserException {
+    public ResponseEntity<?> doLogin(@RequestBody LoginData login, HttpServletRequest request) {
         if (!isNull(login)) {
             User u = userFacade.doLogin(login);
             if (!isNull(u)){
                 return ResponseEntity.ok(u);
             } else {
+                log.info("Facade return empty! Login {}", login);
                 return ResponseEntity
                         .status(HttpStatus.FORBIDDEN)
                         .header(HttpHeaders.CONTENT_TYPE)

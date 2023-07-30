@@ -1,9 +1,5 @@
 package com.dlucchesi.yhfin.facade.imp;
 
-import com.dlucchesi.yhfin.exceptions.LoginDeletedUserException;
-import com.dlucchesi.yhfin.exceptions.LoginInactiveUserException;
-import com.dlucchesi.yhfin.exceptions.LoginNotFoundException;
-import com.dlucchesi.yhfin.exceptions.LoginWrongPasswordException;
 import com.dlucchesi.yhfin.model.User;
 import com.dlucchesi.yhfin.model.data.LoginData;
 import com.dlucchesi.yhfin.service.UserService;
@@ -24,8 +20,8 @@ public class UserFacadeImp implements com.dlucchesi.yhfin.facade.UserFacade {
     protected final UserService userService;
 
     @Override
-    public User doLogin(LoginData login) throws LoginWrongPasswordException,
-            LoginNotFoundException, LoginInactiveUserException, LoginDeletedUserException {
+    public User doLogin(LoginData login) {
+        User ret = null;
         log.debug("User trying login. login {}", login);
         if (!isNull(login)) {
             Optional<User> optU = userService.findByUserId(login.getLogin());
@@ -35,33 +31,31 @@ public class UserFacadeImp implements com.dlucchesi.yhfin.facade.UserFacade {
                 if (user.getPassword().equals(login.getPassword())) {
                     log.debug("User password match! User {}", user);
                     if (activeUser(user)){
-                        return user;
+                        ret = user;
                     }
                 } else {
                     log.info("User password not match!. Login {}", login);
-                    throw new LoginWrongPasswordException("Wrong password");
                 }
             } else {
                 log.info("User not found. Login {}", login);
-                throw new LoginNotFoundException("User not found");
             }
         } else {
             log.warn("Receive empty req!");
         }
-        return null;
+        return ret;
     }
 
-    private Boolean activeUser(User user) throws LoginDeletedUserException, LoginInactiveUserException {
+    private Boolean activeUser(User user) {
         Boolean ret = Boolean.FALSE;
         if (!isNull(user)){
             if(!user.getIsDeleted()) {
                 if (user.getIsActive()) {
                     ret = Boolean.TRUE;
                 } else {
-                    throw new LoginInactiveUserException("Inactive user! User " + user);
+                    log.info("User is not active. User {}", user);
                 }
             } else {
-                throw new LoginDeletedUserException("Deleted user");
+                log.info("User is deleted. User {}", user);
             }
         }
         return ret;

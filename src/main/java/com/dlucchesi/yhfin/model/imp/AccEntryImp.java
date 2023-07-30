@@ -2,6 +2,8 @@ package com.dlucchesi.yhfin.model.imp;
 
 import com.dlucchesi.yhfin.model.Account;
 import com.dlucchesi.yhfin.model.EntryType;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +20,12 @@ public class AccEntryImp extends BasicEntityImp implements com.dlucchesi.yhfin.m
     protected String label;
     protected String description;
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="yyyy-MM-dd")
     protected Date entryDate;
     protected Double amount;
     @Enumerated(EnumType.STRING)
     protected EntryType type;
+    @JsonIgnore
     protected Account account;
 
     @Override

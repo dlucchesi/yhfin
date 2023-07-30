@@ -13,13 +13,15 @@ public class BasicEntityData implements Serializable {
 
         protected Long id;
         protected Boolean isActive;
+        protected Boolean isDeleted;
 
         public BasicEntityData() {
         }
 
-        public BasicEntityData(Long id, Boolean isActive) {
+        public BasicEntityData(Long id, Boolean isActive, Boolean isDeleted) {
             this.id = id;
             this.isActive = isActive;
+            this.isDeleted = isDeleted;
         }
 
         @Override
@@ -27,6 +29,7 @@ public class BasicEntityData implements Serializable {
             return "BasicEntityData{" +
                     "id=" + id +
                     ", isActive=" + isActive +
+                    ", isDeleted=" + isDeleted +
                     '}';
         }
 }

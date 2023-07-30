@@ -23,4 +23,8 @@ public interface AccEntry extends BasicEntity {
     void setAmount(Double amount);
 
     void setType(EntryType type);
+
+    Account getAccount();
+
+    void setAccount(Account account);
 }
