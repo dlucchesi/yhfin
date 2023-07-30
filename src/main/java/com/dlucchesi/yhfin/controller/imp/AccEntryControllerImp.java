@@ -4,8 +4,6 @@ import com.dlucchesi.yhfin.convert.AccEntryDataConvert;
 import com.dlucchesi.yhfin.model.AccEntry;
 import com.dlucchesi.yhfin.model.Account;
 import com.dlucchesi.yhfin.model.data.AccEntryData;
-import com.dlucchesi.yhfin.model.imp.AccEntryImp;
-import com.dlucchesi.yhfin.model.imp.AccountImp;
 import com.dlucchesi.yhfin.service.AccEntryService;
 import com.dlucchesi.yhfin.service.AccountService;
 import io.swagger.v3.oas.annotations.tags.Tag;
